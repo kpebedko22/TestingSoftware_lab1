@@ -3,9 +3,9 @@ python:
   - "3.8.1"
 install:
   - pip install pytest
-  - pip install coverage
+  - pip install pytest-cov
   - pip install coveralls
 script:
-  - coverage run -m pytest unit_tests.py
+  - pytest --cov=TestingSoftware_lab1/
 after_success:
   - coveralls
