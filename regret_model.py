@@ -53,8 +53,6 @@ class RegretModel:
 
         res = [i for i in range(self.num_actions) if avgR[i] == minR]
 
-        #self._print('Критерий, основанный на известных вероятностях условий', self.regret_matrix, [avgR], ['r_i'], res)
-
         return res
 
     def WaldsCriterion(self):
@@ -73,8 +71,6 @@ class RegretModel:
         minA = [min(self.payoff_matrix[i]) for i in range(self.num_actions)]
         maxminA = max(minA)
         res = [i for i in range(self.num_actions) if minA[i] == maxminA]
-
-        #self._print('Критерий Вальда', self.payoff_matrix, [minA], ['x_min'], res)
 
         return res
 
@@ -95,7 +91,6 @@ class RegretModel:
         minmaxR = min(maxR)
         res = [i for i in range(self.num_actions) if maxR[i] == minmaxR]
         
-        #self._print('Критерий Сэвиджа', self.regret_matrix, [maxR], ['x_max'], res)
         return res
 
     def HurwiczsCriterionPayoff(self, coef):
@@ -122,8 +117,6 @@ class RegretModel:
         max_value = max(values)
 
         res = [i for i in range(self.num_actions) if values[i] == max_value]
-
-        #self._print('', self.payoff_matrix, [minA, maxA, values], ['x_min', 'x_max', 'H'], res)
 
         return res
 
@@ -153,46 +146,8 @@ class RegretModel:
 
         res = [i for i in range(self.num_actions) if values[i] == min_value]
 
-        #self._print('', self.regret_matrix, [minR, maxR, values], ['x_min', 'x_max', 'H'], res)
-
         return res
 
-    def print(self, payoff, regret):
-        if payoff:
-            self._print('Матрица выигрышей', self.payoff_matrix, None, None, None)
-        print('')
-        if regret:
-            self._print('Матрица рисков', self.regret_matrix, None, None, None)
-        print('')
 
-    def _print(self, title, matrix, collumns, names, to_highlight):
-
-        if title != '':
-            print(title)
-
-        print('    |', end='')
-        for i in range(self.num_events):
-            print('{:5}{}{} |'.format(' ','P', i + 1), end='')
-
-        # заголовок для каждого доп столбика
-        if collumns:
-            for i in range(len(collumns)):
-                print(' {:6} |'.format(names[i]), end='')
-
-        print('')
-        
-        for i in range(self.num_actions):
-            print(' {}{} |'.format('A', i + 1), end='')
-            for j in range(self.num_events):
-                print(' {:6} |'.format(matrix[i][j]),end='')
-
-            if collumns:
-                for j in range(len(collumns)):
-                    # если ласт столбик, то надо выбирать хайлайт
-                    if (j == (len(collumns) - 1)) and (i in to_highlight):
-                        print(' ' + '\033[1;32m' + '{:6}'.format(round(collumns[j][i], 2)) + '\033[1;m' + ' |', end='')
-                    else:
-                        print(' {:6} |'.format(round(collumns[j][i], 2)), end='')
-            print('')
 
 

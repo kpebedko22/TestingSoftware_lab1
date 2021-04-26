@@ -201,5 +201,6 @@ class Test_HurwiczsCriterionRegret(unittest.TestCase):
         assert array_equal(true_hurwiczs, hurwiczs) == True
 
 
+
 if __name__ == "__main__":
     unittest.main()
