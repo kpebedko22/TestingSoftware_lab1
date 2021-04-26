@@ -1,5 +1,4 @@
 
-
 class RegretModel:
 
     def __init__(self, payoff_matrix):
