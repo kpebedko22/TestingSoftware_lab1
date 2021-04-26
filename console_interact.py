@@ -1,4 +1,3 @@
-import numpy as np
 
 def safe_input_float(string_):
     while True:
