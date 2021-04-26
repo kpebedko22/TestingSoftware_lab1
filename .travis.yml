@@ -5,6 +5,6 @@ install:
   - pip install coverage
   - pip install coveralls
 script:
-  - coverage report
+  - coverage run -m pytest unit_tests.py
 after_success:
   - coveralls
