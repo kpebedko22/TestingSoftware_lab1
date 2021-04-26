@@ -1,8 +1,6 @@
 import unittest
 from regret_model import RegretModel
 
-from numpy import array_equal
-
 class Test_GetRegretMatrix(unittest.TestCase):
     """ Тест: получения матрицы рисков """
     def test_1_GetRegretMatrix(self):
@@ -11,7 +9,6 @@ class Test_GetRegretMatrix(unittest.TestCase):
             [7, 8, 6],
             [9, 8, 4]
         ]
-
         true_regret_matrix = [
             [4, 1, 0],
             [2, 0, 4],
@@ -19,10 +16,8 @@ class Test_GetRegretMatrix(unittest.TestCase):
         ]
 
         model = RegretModel(matrix)
-
         regret_matrix = model._get_regret_matrix()
-
-        assert array_equal(true_regret_matrix, regret_matrix) == True
+        self.assertEqual(true_regret_matrix, regret_matrix)
 
     def test_2_GetRegretMatrix(self):
         matrix = [
@@ -31,7 +26,6 @@ class Test_GetRegretMatrix(unittest.TestCase):
             [25, 30, 45],
             [75, 5, 40]
         ]
-
         true_regret_matrix = [
             [60, 5, 0],
             [15, 10, 15],
@@ -40,10 +34,8 @@ class Test_GetRegretMatrix(unittest.TestCase):
         ]
 
         model = RegretModel(matrix)
-
         regret_matrix = model._get_regret_matrix()
-
-        assert array_equal(true_regret_matrix, regret_matrix) == True
+        self.assertEqual(true_regret_matrix, regret_matrix)
 
     def test_3_GetRegretMatrix(self):
         matrix = [
@@ -51,7 +43,6 @@ class Test_GetRegretMatrix(unittest.TestCase):
             [11, 10, 7, 8],
             [13, 8, 14, 7]
         ]
-
         true_regret_matrix = [
             [5, 1, 4, 0],
             [2, 0, 7, 3],
@@ -59,10 +50,8 @@ class Test_GetRegretMatrix(unittest.TestCase):
         ]
 
         model = RegretModel(matrix)
-
         regret_matrix = model._get_regret_matrix()
-
-        assert array_equal(true_regret_matrix, regret_matrix) == True
+        self.assertEqual(true_regret_matrix, regret_matrix)
 
 
 class Test_PartialUncertainty(unittest.TestCase):
@@ -74,14 +63,11 @@ class Test_PartialUncertainty(unittest.TestCase):
             [9, 8, 4]
         ]
         probs = [0.7, 0.2, 0.1]
-
         true_expect = [2]
 
         model = RegretModel(matrix)
-
         expect = model.PartialUncertainty(probs)
-
-        assert array_equal(true_expect, expect) == True
+        self.assertEqual(true_expect, expect)
 
     def test_2_PartialUncertainty(self):
         matrix = [
@@ -91,14 +77,11 @@ class Test_PartialUncertainty(unittest.TestCase):
             [75, 5, 40]
         ]
         probs = [0.3, 0.1, 0.6]
-
         true_expect = [3]
 
         model = RegretModel(matrix)
-
         expect = model.PartialUncertainty(probs)
-
-        assert array_equal(true_expect, expect) == True
+        self.assertEqual(true_expect, expect)
 
     def test_3_PartialUncertainty(self):
         matrix = [
@@ -107,14 +90,11 @@ class Test_PartialUncertainty(unittest.TestCase):
             [13, 8, 14, 7]
         ]
         probs = [0.25, 0.25, 0.25, 0.25]
-
         true_expect = [2]
 
         model = RegretModel(matrix)
-
         expect = model.PartialUncertainty(probs)
-
-        assert array_equal(true_expect, expect) == True
+        self.assertEqual(true_expect, expect)
 
 class Test_WaldsCriterion(unittest.TestCase):
     """ Тест: критерий вальда """
@@ -128,7 +108,7 @@ class Test_WaldsCriterion(unittest.TestCase):
 
         model = RegretModel(matrix)
         wald = model.WaldsCriterion()
-        assert array_equal(true_wald, wald) == True
+        self.assertEqual(true_wald, wald)
 
     def test_2_WaldsCriterion(self):
         matrix = [
@@ -141,10 +121,8 @@ class Test_WaldsCriterion(unittest.TestCase):
         true_wald = [2]
 
         model = RegretModel(matrix)
-
         wald = model.WaldsCriterion()
-
-        assert array_equal(true_wald, wald) == True
+        self.assertEqual(true_wald, wald)
 
     def test_3_WaldsCriterion(self):
         matrix = [
@@ -155,10 +133,8 @@ class Test_WaldsCriterion(unittest.TestCase):
         true_wald = [0]
 
         model = RegretModel(matrix)
-
         wald = model.WaldsCriterion()
-
-        assert array_equal(true_wald, wald) == True
+        self.assertEqual(true_wald, wald)
 
 class Test_SavagesCriterion(unittest.TestCase):
     """ Тест: критерий сэвиджа """
@@ -172,7 +148,7 @@ class Test_SavagesCriterion(unittest.TestCase):
 
         model = RegretModel(matrix)
         savage = model.SavagesCriterion()
-        assert array_equal(true_savage, savage) == True
+        self.assertEqual(true_savage, savage)
 
     def test_2_SavagesCriterion(self):
         matrix = [
@@ -185,7 +161,7 @@ class Test_SavagesCriterion(unittest.TestCase):
 
         model = RegretModel(matrix)
         savage = model.SavagesCriterion()
-        assert array_equal(true_savage, savage) == True
+        self.assertEqual(true_savage, savage)
 
     def test_3_SavagesCriterion(self):
         matrix = [
@@ -197,7 +173,7 @@ class Test_SavagesCriterion(unittest.TestCase):
 
         model = RegretModel(matrix)
         savage = model.SavagesCriterion()
-        assert array_equal(true_savage, savage) == True
+        self.assertEqual(true_savage, savage)
 
 class Test_HurwiczsCriterionPayoff(unittest.TestCase):
     """ Тест: критерий гурвица (выигрыш) """
@@ -212,7 +188,7 @@ class Test_HurwiczsCriterionPayoff(unittest.TestCase):
 
         model = RegretModel(matrix)
         hurwiczs = model.HurwiczsCriterionPayoff(coef)
-        assert array_equal(true_hurwiczs, hurwiczs) == True
+        self.assertEqual(true_hurwiczs, hurwiczs)
 
     def test_2_HurwiczsCriterionPayoff(self):
         matrix = [
@@ -226,7 +202,7 @@ class Test_HurwiczsCriterionPayoff(unittest.TestCase):
 
         model = RegretModel(matrix)
         hurwiczs = model.HurwiczsCriterionPayoff(coef)
-        assert array_equal(true_hurwiczs, hurwiczs) == True
+        self.assertEqual(true_hurwiczs, hurwiczs)
 
     def test_3_HurwiczsCriterionPayoff(self):
         matrix = [
@@ -239,7 +215,7 @@ class Test_HurwiczsCriterionPayoff(unittest.TestCase):
 
         model = RegretModel(matrix)
         hurwiczs = model.HurwiczsCriterionPayoff(coef)
-        assert array_equal(true_hurwiczs, hurwiczs) == True
+        self.assertEqual(true_hurwiczs, hurwiczs)
 
 class Test_HurwiczsCriterionRegret(unittest.TestCase):
     """ Тест: критерий гурвица (риск) """
@@ -254,7 +230,7 @@ class Test_HurwiczsCriterionRegret(unittest.TestCase):
 
         model = RegretModel(matrix)
         hurwiczs = model.HurwiczsCriterionRegret(coef)
-        assert array_equal(true_hurwiczs, hurwiczs) == True
+        self.assertEqual(true_hurwiczs, hurwiczs)
 
     def test_2_HurwiczsCriterionRegret(self):
         matrix = [
@@ -268,7 +244,7 @@ class Test_HurwiczsCriterionRegret(unittest.TestCase):
 
         model = RegretModel(matrix)
         hurwiczs = model.HurwiczsCriterionRegret(coef)
-        assert array_equal(true_hurwiczs, hurwiczs) == True
+        self.assertEqual(true_hurwiczs, hurwiczs)
 
     def test_3_HurwiczsCriterionRegret(self):
         matrix = [
@@ -281,7 +257,7 @@ class Test_HurwiczsCriterionRegret(unittest.TestCase):
 
         model = RegretModel(matrix)
         hurwiczs = model.HurwiczsCriterionRegret(coef)
-        assert array_equal(true_hurwiczs, hurwiczs) == True
+        self.assertEqual(true_hurwiczs, hurwiczs)
 
 
 if __name__ == "__main__":
